@@ -1,0 +1,3 @@
+entity FullAdder is
+	Port(x, y, Cin : in bit;
+		  Cout, Sum : out bit);
