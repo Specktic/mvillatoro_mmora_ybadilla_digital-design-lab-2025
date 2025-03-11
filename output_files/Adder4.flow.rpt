@@ -1,5 +1,5 @@
 Flow report for Adder4
-Mon Mar 10 22:46:06 2025
+Mon Mar 10 22:56:24 2025
 Quartus Prime Version 23.1std.1 Build 993 05/14/2024 SC Lite Edition
 
 
@@ -38,24 +38,29 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+------------------------------------------------------------------------------+
-; Flow Summary                                                                 ;
-+-----------------------------+------------------------------------------------+
-; Flow Status                 ; Flow Failed - Mon Mar 10 22:46:06 2025         ;
-; Quartus Prime Version       ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
-; Revision Name               ; Adder4                                         ;
-; Top-level Entity Name       ; Adder4                                         ;
-; Family                      ; Cyclone V                                      ;
-; Device                      ; 5CSXFC6D6F31C6                                 ;
-; Timing Models               ; Final                                          ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                      ;
-; Total registers             ; N/A until Partition Merge                      ;
-; Total pins                  ; N/A until Partition Merge                      ;
-; Total virtual pins          ; N/A until Partition Merge                      ;
-; Total block memory bits     ; N/A until Partition Merge                      ;
-; Total PLLs                  ; N/A until Partition Merge                      ;
-; Total DLLs                  ; N/A until Partition Merge                      ;
-+-----------------------------+------------------------------------------------+
++----------------------------------------------------------------------------------+
+; Flow Summary                                                                     ;
++---------------------------------+------------------------------------------------+
+; Flow Status                     ; Successful - Mon Mar 10 22:56:24 2025          ;
+; Quartus Prime Version           ; 23.1std.1 Build 993 05/14/2024 SC Lite Edition ;
+; Revision Name                   ; Adder4                                         ;
+; Top-level Entity Name           ; Adder4                                         ;
+; Family                          ; Cyclone V                                      ;
+; Device                          ; 5CSXFC6D6F31C6                                 ;
+; Timing Models                   ; Final                                          ;
+; Logic utilization (in ALMs)     ; 4 / 41,910 ( < 1 % )                           ;
+; Total registers                 ; 0                                              ;
+; Total pins                      ; 14 / 499 ( 3 % )                               ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0 / 5,662,720 ( 0 % )                          ;
+; Total DSP Blocks                ; 0 / 112 ( 0 % )                                ;
+; Total HSSI RX PCSs              ; 0 / 9 ( 0 % )                                  ;
+; Total HSSI PMA RX Deserializers ; 0 / 9 ( 0 % )                                  ;
+; Total HSSI TX PCSs              ; 0 / 9 ( 0 % )                                  ;
+; Total HSSI PMA TX Serializers   ; 0 / 9 ( 0 % )                                  ;
+; Total PLLs                      ; 0 / 15 ( 0 % )                                 ;
+; Total DLLs                      ; 0 / 4 ( 0 % )                                  ;
++---------------------------------+------------------------------------------------+
 
 
 +-----------------------------------------+
@@ -63,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/10/2025 22:46:00 ;
+; Start date & time ; 03/10/2025 22:55:48 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Adder4              ;
 +-------------------+---------------------+
@@ -74,7 +79,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id                        ;
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID               ; 49410867079282.174166836016616         ; --            ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID               ; 49410867079282.174166894811128         ; --            ; --          ; --                                ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_timing           ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_boundary_scan    ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST     ; Off                                    ; --            ; --          ; eda_board_design_signal_integrity ;
@@ -91,8 +96,9 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 4847 MB             ; 00:00:09                           ;
-; Total                ; 00:00:06     ; --                      ; --                  ; 00:00:09                           ;
+; Analysis & Synthesis ; 00:00:06     ; 1.0                     ; 4895 MB             ; 00:00:09                           ;
+; Fitter               ; 00:00:29     ; 1.0                     ; 6878 MB             ; 00:00:32                           ;
+; Total                ; 00:00:35     ; --                      ; --                  ; 00:00:41                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -102,6 +108,7 @@ https://fpgasoftware.intel.com/eula.
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
 ; Analysis & Synthesis ; PC_Marco         ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; PC_Marco         ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 
@@ -109,6 +116,7 @@ https://fpgasoftware.intel.com/eula.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off Adder4 -c Adder4
+quartus_fit --read_settings_files=off --write_settings_files=off Adder4 -c Adder4
 
 
 

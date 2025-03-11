@@ -8,5 +8,24 @@ architecture full_adder of FullAdder is
 begin
 	Sum <= x xor y xor Cin;
 	Cout <= (x and y) or (y and Cin) or (x and Cin);
-end fulladder;
+end full_adder;
 
+entity Adder4 is
+	Port(A, B : in bit_vector(3 downto 0);
+		  Ci : in bit;
+		  S : out bit_vector(3 downto 0);
+		  Co : out bit);
+	end Adder4;
+	
+architecture adder_4 of Adder4 is
+component FullAdder
+	Port(x, y, Cin : in bit;
+		  Cout, Sum : out bit);
+end component;
+signal C : bit_vector(3 downto 1);
+begin
+	FA0 : FullAdder port map( A(0), B(0), Ci, C(1), S(0));
+	FA1 : FullAdder port map( A(1), B(1), C(1), C(2), S(1));
+	FA2 : FullAdder port map( A(2), B(2), C(2), C(3), S(2));
+	FA3 : FullAdder port map( A(3), B(3), C(3), Co, S(3));
+end adder_4;
