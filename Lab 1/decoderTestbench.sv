@@ -1,12 +1,12 @@
 /*Testbench*/
 
-module binaryToBCD_tb();
+module decoderTestbench();
     logic [3:0] bin;         // Entrada binaria para prueba
     logic [3:0] decenas;     // Salida esperada => Decenas
     logic [3:0] unidades;    // Salida esperada => Unidades
 
     // Se instancia el modulo que se probara
-    binaryToBCD uut (
+    decoder uut (
         .bin(bin),
         .decenas(decenas),
         .unidades(unidades)

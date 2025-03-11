@@ -1,0 +1,31 @@
+# ** Warning: (vish-14) Failed to open "C:\intelFPGA\18.1\modelsim_ase\win32aloem" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# Reading pref.tcl
+# ** Warning: (vsim-14) Failed to open "C:\intelFPGA\18.1\modelsim_ase\win32aloem" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# do decoder_run_msim_rtl_verilog.do
+# if ![file isdirectory verilog_libs] {
+# 	file mkdir verilog_libs
+# }
+# 
+# vlib verilog_libs/altera_ver
+# vmap altera_ver ./verilog_libs/altera_ver
+# C:\intelFPGA\18.1\modelsim_ase\win32aloem not found
+# ** Warning: (vmap-14) Failed to open "C:\intelFPGA\18.1\modelsim_ase\win32aloem" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap altera_ver ./verilog_libs/altera_ver 
+# ** Error: (vmap-7) Failed to open ini file "C:\intelFPGA\18.1\modelsim_ase\win32aloem" in write mode.
+# No such file or directory. (errno = ENOENT)
+# Error in macro ./decoder_run_msim_rtl_verilog.do line 7
+# ** Warning: (vmap-14) Failed to open "C:\intelFPGA\18.1\modelsim_ase\win32aloem" specified by the MODELSIM environment variable.
+# No such file or directory. (errno = ENOENT)
+# Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+# vmap altera_ver ./verilog_libs/altera_ver 
+# ** Error: (vmap-7) Failed to open ini file "C:\intelFPGA\18.1\modelsim_ase\win32aloem" in write mode.
+# No such file or directory. (errno = ENOENT)
+#     while executing
+# "error [FixExecError $msg]"
+#     (procedure "vmap" line 29)
+#     invoked from within
+# "vmap altera_ver ./verilog_libs/altera_ver"
