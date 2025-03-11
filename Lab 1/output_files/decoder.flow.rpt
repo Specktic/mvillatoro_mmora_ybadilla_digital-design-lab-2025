@@ -1,5 +1,5 @@
 Flow report for decoder
-Tue Mar 11 01:46:26 2025
+Tue Mar 11 03:18:50 2025
 Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 
 
@@ -41,7 +41,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +---------------------------------+------------------------------------------------+
-; Flow Status                     ; Successful - Tue Mar 11 01:46:26 2025          ;
+; Flow Status                     ; Successful - Tue Mar 11 03:18:50 2025          ;
 ; Quartus Prime Version           ; 22.1std.0 Build 915 10/25/2022 SC Lite Edition ;
 ; Revision Name                   ; decoder                                        ;
 ; Top-level Entity Name           ; decoder                                        ;
@@ -98,31 +98,33 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+-----------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                        ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 4799 MB             ; 00:00:26                           ;
-; Fitter               ; 00:00:50     ; 1.0                     ; 6178 MB             ; 00:01:22                           ;
-; Assembler            ; 00:00:06     ; 1.0                     ; 4871 MB             ; 00:00:06                           ;
-; Timing Analyzer      ; 00:00:05     ; 1.0                     ; 5124 MB             ; 00:00:04                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4726 MB             ; 00:00:01                           ;
-; Total                ; 00:01:14     ; --                      ; --                  ; 00:01:59                           ;
-+----------------------+--------------+-------------------------+---------------------+------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis    ; 00:00:12     ; 1.0                     ; 4799 MB             ; 00:00:26                           ;
+; Fitter                  ; 00:00:50     ; 1.0                     ; 6178 MB             ; 00:01:22                           ;
+; Assembler               ; 00:00:06     ; 1.0                     ; 4871 MB             ; 00:00:06                           ;
+; Timing Analyzer         ; 00:00:05     ; 1.0                     ; 5124 MB             ; 00:00:04                           ;
+; EDA Netlist Writer      ; 00:00:01     ; 1.0                     ; 4726 MB             ; 00:00:01                           ;
+; I/O Assignment Analysis ; 00:00:12     ; 1.0                     ; 5444 MB             ; 00:00:12                           ;
+; Total                   ; 00:01:26     ; --                      ; --                  ; 00:02:11                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                    ;
-+----------------------+------------------+------------+------------+----------------+
-; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
-+----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
-+----------------------+------------------+------------+------------+----------------+
++---------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                       ;
++-------------------------+------------------+------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++-------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis    ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter                  ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler               ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer         ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer      ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
+; I/O Assignment Analysis ; DESKTOP-TR02K0H  ; Windows 10 ; 10.0       ; x86_64         ;
++-------------------------+------------------+------------+------------+----------------+
 
 
 ------------
@@ -133,6 +135,7 @@ quartus_fit --read_settings_files=off --write_settings_files=off decoder -c deco
 quartus_asm --read_settings_files=off --write_settings_files=off decoder -c decoder
 quartus_sta decoder -c decoder
 quartus_eda --read_settings_files=off --write_settings_files=off decoder -c decoder
+quartus_fit --read_settings_files=on --write_settings_files=off decoder -c decoder --plan
 
 
 
