@@ -86,3 +86,63 @@ begin
     end process;
 
 end Behavioral;
+
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+
+entity tb_Adder4 is
+end tb_Adder4;
+
+architecture behavior of tb_Adder4 is
+
+    -- Component declaration for the Unit Under Test (UUT)
+    component Adder4
+        Port (SW : in std_logic_vector(7 downto 0);
+              HEX0, HEX1 : out std_logic_vector(6 downto 0));
+    end component;
+
+    -- Signals for connecting to the UUT
+    signal SW : std_logic_vector(7 downto 0);
+    signal HEX0, HEX1 : std_logic_vector(6 downto 0);
+
+begin
+
+    -- Instantiate the UUT
+    uut: Adder4 PORT MAP (SW => SW,
+								  HEX0 => HEX0,
+								  HEX1 => HEX1);
+
+    -- Stimulus process
+    stim_proc: process
+    begin
+        -- Test case 1: 3 + 5 (00000011 + 00000101)
+        SW <= "00000011";  -- A = 3, B = 5
+        WAIT FOR 10 ns;
+
+        -- Test case 2: 15 + 7 (00001111 + 00000111)
+        SW <= "00001111";  -- A = 15, B = 7
+        WAIT FOR 10 ns;
+
+        -- Test case 3: 8 + 6 (00001000 + 00000110)
+        SW <= "00001000";  -- A = 8, B = 6
+        WAIT FOR 10 ns;
+
+        -- Test case 4: 0 + 0 (00000000 + 00000000)
+        SW <= "00000000";  -- A = 0, B = 0
+        WAIT FOR 10 ns;
+
+        -- Test case 5: 15 + 15 (00001111 + 00001111)
+        SW <= "00001111";  -- A = 15, B = 15
+        WAIT FOR 10 ns;
+
+        -- Test case 6: 9 + 8 (00001001 + 00001000)
+        SW <= "00001001";  -- A = 9, B = 8
+        WAIT FOR 10 ns;
+
+        -- End of simulation
+        WAIT;
+    end process;
+
+end behavior;
+
