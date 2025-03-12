@@ -1,7 +1,10 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
 -- Adder de 1 bit
 entity FullAdder is
-	Port(x, y, Cin : in bit;
-		  Cout, Sum : out bit);
+	Port(x, y, Cin : in std_logic;
+		  Cout, Sum : out std_logic);
 end FullAdder;
 
 architecture full_adder of FullAdder is
@@ -11,16 +14,16 @@ begin
 end full_adder;
 
 entity Adder4 is
-	Port(A, B : in bit_vector(3 downto 0);
-		  Ci : in bit;
-		  S : out bit_vector(3 downto 0);
-		  Co : out bit);
+	Port(A, B : in std_logic_vector(3 downto 0);
+		  Ci : in std_logic;
+		  S : out std_logic_vector(3 downto 0);
+		  Co : out std_logic);
 	end Adder4;
 	
 architecture adder_4 of Adder4 is
 component FullAdder
-	Port(x, y, Cin : in bit;
-		  Cout, Sum : out bit);
+	Port(x, y, Cin : in std_logic;
+		  Cout, Sum : out std_logic);
 end component;
 signal C : bit_vector(3 downto 1);
 begin
