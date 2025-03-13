@@ -21,7 +21,6 @@ Tabla de Verdad utilizada
 | 1111 (15)       | 0001 0101 (15)    | Maximo valor posible es 15 por cantidad de bits =>4
 */
 
-
 module decoder(
     input logic [3:0] bin,
     output logic [6:0] display0,
@@ -47,5 +46,44 @@ module decoder(
     );
 
 endmodule
+
+module bin_to_bcd(
+    input logic [3:0] bin,
+    output logic [3:0] decenas,
+    output logic [3:0] unidades
+);
+    assign decenas[0] = bin[3] & (bin[2] | bin[1]);
+    assign decenas[1] = 0;
+    assign decenas[2] = 0;
+    assign decenas[3] = 0;
+
+    assign unidades[0] = bin[0] ^ (bin[3] & bin[1]);
+    assign unidades[1] = bin[1] ^ (bin[3] & bin[2]);
+    assign unidades[2] = bin[2] & ~bin[3];
+    assign unidades[3] = 0;
+endmodule
+
+module bcd_to_7seg(
+    input logic [3:0] bcd,
+    output logic [6:0] display
+);
+    always_comb begin
+        case (bcd)
+            4'b0000: display = 7'b0111111;  // 0
+            4'b0001: display = 7'b0000110;  // 1
+            4'b0010: display = 7'b1011011;  // 2
+            4'b0011: display = 7'b1001111;  // 3
+            4'b0100: display = 7'b1100110;  // 4
+            4'b0101: display = 7'b1101101;  // 5
+            4'b0110: display = 7'b1111101;  // 6
+            4'b0111: display = 7'b0000111;  // 7
+            4'b1000: display = 7'b1111111;  // 8
+            4'b1001: display = 7'b1101111;  // 9
+            default: display = 7'b0000000;  // Apagado
+        endcase
+    end
+endmodule
+
+
 
 
