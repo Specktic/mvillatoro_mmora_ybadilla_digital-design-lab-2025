@@ -1,0 +1,11 @@
+I/O Assignment Analysis Status : Successful - Tue Mar 11 03:18:50 2025
+Quartus Prime Version : 22.1std.0 Build 915 10/25/2022 SC Lite Edition
+Revision Name : decoder
+Top-level Entity Name : decoder
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Total pins : 12 / 499 ( 2 % )
+Total virtual pins : 0
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )
