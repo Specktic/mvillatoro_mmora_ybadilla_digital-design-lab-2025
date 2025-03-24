@@ -1,22 +1,10 @@
-typedef enum {
-  Add,
-  Sub,
-  Mult,
-  Div,
-  Mod,
-  And,
-  Or,
-  Xor,
-  LShift,
-  RShift
-
-} OpCode;
+import OpCodeEnum::*;
 
 
-module ALU #(parameter N=2)(
+module ALU #(parameter N=4)(
   input  logic [N-1:0] A,
   input  logic [N-1:0] B,
-  input  OpCode      op,
+  input  OpCode op,
   output logic [N-1:0] out,
   output logic [N-1:0] suma_result,
   output logic carry_out,
