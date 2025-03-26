@@ -12,25 +12,25 @@ Z0 dC:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/
 vALU
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
 Z2 DXx4 work 10 OpCodeEnum 0 22 A6d4OAbm1j8Pg0F`nmIWY1
-Z3 DXx4 work 11 ALU_sv_unit 0 22 g^Sb;ne^8f2^b=:ZhV4BA1
-Z4 !s110 1742866002
+Z3 DXx4 work 11 ALU_sv_unit 0 22 bb?3jed9j:cnM?:9QnEaG2
+Z4 !s110 1742961553
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 r1
 !s85 0
 !i10b 1
-!s100 khMUAg8X:IOHGcGTHO?N<1
-I08R3kgeSb<W2EE74dK]4j3
+!s100 ]bPziAV2zc@bnfoXFSMHZ3
+IP<;TdJzFkIOCZk2_ZPBI`2
 Z6 !s105 ALU_sv_unit
 S1
 R0
-Z7 w1742865380
+Z7 w1742954394
 Z8 8C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv
 Z9 FC:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv
 !i122 1
-L0 4 55
+L0 77 66
 Z10 OV;L;2020.1;71
 31
-Z11 !s108 1742866002.000000
+Z11 !s108 1742961553.000000
 Z12 !s107 C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv|
 Z13 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025|C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv|
 !i113 1
@@ -42,12 +42,12 @@ XALU_sv_unit
 R1
 R2
 R4
-Vg^Sb;ne^8f2^b=:ZhV4BA1
+Vbb?3jed9j:cnM?:9QnEaG2
 r1
 !s85 0
 !i10b 1
-!s100 :oA_RhUGf6E8[XJ^?Fh6k1
-Ig^Sb;ne^8f2^b=:ZhV4BA1
+!s100 l@[nFjU6nCg^5JgoVC8cX3
+Ibb?3jed9j:cnM?:9QnEaG2
 !i103 1
 S1
 R0
@@ -55,7 +55,7 @@ R7
 R8
 R9
 !i122 1
-Z17 L0 1 0
+L0 75 0
 R10
 31
 R11
@@ -69,27 +69,27 @@ n@a@l@u_sv_unit
 vALU_testbench
 R1
 R2
-DXx4 work 21 ALU_testbench_sv_unit 0 22 bPOY2`JcaHlPzjRWR8LaQ3
+DXx4 work 21 ALU_testbench_sv_unit 0 22 bPEGf1>@_l3@0OfIHgD>B3
 R4
 R5
 r1
 !s85 0
 !i10b 1
-!s100 GU]gQme9ihGaMa1eZT]4M2
-ILT@^6inLW]KFnNWa1]4@X2
+!s100 nm:;D1gJOL[WNGRaG[9252
+ICVl1JE8L2>3<VSH><7TCQ3
 !s105 ALU_testbench_sv_unit
 S1
 R0
-Z18 w1742865970
-Z19 8C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv
-Z20 FC:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv
+Z17 w1742961520
+Z18 8C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv
+Z19 FC:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv
 !i122 2
-L0 4 54
+L0 4 73
 R10
 31
 R11
 !s107 C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv|
-Z21 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025|C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv|
+Z20 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025|C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv|
 !i113 1
 R14
 R15
@@ -99,50 +99,50 @@ XALU_testbench_sv_unit
 R1
 R2
 R4
-VbPOY2`JcaHlPzjRWR8LaQ3
+VbPEGf1>@_l3@0OfIHgD>B3
 r1
 !s85 0
 !i10b 1
-!s100 eZN7K3>BC3B3=7>:1d2FE0
-IbPOY2`JcaHlPzjRWR8LaQ3
+!s100 zUkR4T^fQZ>95QCmF3ERO3
+IbPEGf1>@_l3@0OfIHgD>B3
 !i103 1
 S1
 R0
+R17
 R18
 R19
-R20
 !i122 2
 L0 2 0
 R10
 31
 R11
-Z22 !s107 C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv|
-R21
+Z21 !s107 C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv|
+R20
 !i113 1
 R14
 R15
 R16
 n@a@l@u_testbench_sv_unit
 vmultiplicador
-R1
-R2
-R3
-R4
-R5
-r1
-!s85 0
-!i10b 1
-!s100 ^^k4TjJ??0b7^bn2ng[o;2
-IREB>F6_I<0W7fF4Ba[jS<3
 R6
+R3
+R1
+R4
+!i10b 1
+!s100 SWI[5EoR8R^FINGQ:JXQ`0
+Z22 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IIbSCgj74g7n=zlf>8]Mi[2
+R5
 S1
 R0
 R7
 R8
 R9
 !i122 1
-L0 107 21
+L0 54 17
 R10
+r1
+!s85 0
 31
 R11
 R12
@@ -156,7 +156,7 @@ R1
 R4
 !i10b 1
 !s100 VKkTWzV_j7=NB>9BQT^@b1
-!s11b Dg1SIo80bB@j0V0VzS_@n1
+R22
 IA6d4OAbm1j8Pg0F`nmIWY1
 VA6d4OAbm1j8Pg0F`nmIWY1
 S1
@@ -165,12 +165,12 @@ w1742838913
 8C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv
 FC:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv
 !i122 0
-R17
+L0 1 0
 R10
 r1
 !s85 0
 31
-R11
+!s108 1742961552.000000
 !s107 C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025|C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv|
 !i113 1
@@ -179,25 +179,25 @@ R15
 R16
 n@op@code@enum
 vrestador
-R1
-R2
-R3
-R4
-R5
-r1
-!s85 0
-!i10b 1
-!s100 DZGn^a^hJSfGaP:9JGUF?0
-IWgTf6kV6FgEE0GL8TiYl92
 R6
+R3
+R1
+R4
+!i10b 1
+!s100 3oWe;DeEB@5RNc@6z:93o2
+R22
+IPjjlfCJeiV>X7kFo;C24U3
+R5
 S1
 R0
 R7
 R8
 R9
 !i122 1
-L0 84 21
+L0 29 21
 R10
+r1
+!s85 0
 31
 R11
 R12
@@ -207,25 +207,25 @@ R14
 R15
 R16
 vsumador
-R1
-R2
-R3
-R4
-R5
-r1
-!s85 0
-!i10b 1
-!s100 Ri@;^:5R9KP56HBclJO]Q0
-I?]MfTlPK2g:TA6fD6[9A61
 R6
+R3
+R1
+R4
+!i10b 1
+!s100 AcYXO>8Kg@m0dZa^KGQDA1
+R22
+I[8JA4OoeKc_Sm[X7acA_d1
+R5
 S1
 R0
 R7
 R8
 R9
 !i122 1
-L0 60 22
+L0 4 21
 R10
+r1
+!s85 0
 31
 R11
 R12

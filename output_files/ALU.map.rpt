@@ -1,5 +1,5 @@
-Analysis & Elaboration report for ALU
-Mon Mar 24 19:26:17 2025
+Analysis & Synthesis report for ALU
+Tue Mar 25 22:08:00 2025
 Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 
 
@@ -7,15 +7,23 @@ Quartus Prime Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Elaboration Summary
-  3. Parallel Compilation
-  4. Parameter Settings for User Entity Instance: Top-level Entity: |ALU
-  5. Parameter Settings for User Entity Instance: sumador:operacion_suma
-  6. Parameter Settings for User Entity Instance: restador:operacion_resta
-  7. Parameter Settings for User Entity Instance: multiplicador:mult_logic
-  8. Analysis & Elaboration Settings
-  9. Port Connectivity Checks: "sumador:operacion_suma"
- 10. Analysis & Elaboration Messages
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. General Register Statistics
+  9. Parameter Settings for User Entity Instance: Top-level Entity: |ALU
+ 10. Parameter Settings for User Entity Instance: sumador:operacion_suma
+ 11. Parameter Settings for User Entity Instance: restador:operacion_resta
+ 12. Parameter Settings for User Entity Instance: multiplicador:mult_logic
+ 13. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 14. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
+ 15. Port Connectivity Checks: "sumador:operacion_suma"
+ 16. Post-Synthesis Netlist Statistics for Top Partition
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -39,82 +47,31 @@ https://fpgasoftware.intel.com/eula.
 
 
 
-+--------------------------------------------------------------------------------+
-; Analysis & Elaboration Summary                                                 ;
-+-------------------------------+------------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Mon Mar 24 19:26:17 2025          ;
-; Quartus Prime Version         ; 22.1std.0 Build 915 10/25/2022 SC Lite Edition ;
-; Revision Name                 ; ALU                                            ;
-; Top-level Entity Name         ; ALU                                            ;
-; Family                        ; Cyclone V                                      ;
-; Logic utilization (in ALMs)   ; N/A until Partition Merge                      ;
-; Total registers               ; N/A until Partition Merge                      ;
-; Total pins                    ; N/A until Partition Merge                      ;
-; Total virtual pins            ; N/A until Partition Merge                      ;
-; Total block memory bits       ; N/A until Partition Merge                      ;
-; Total PLLs                    ; N/A until Partition Merge                      ;
-; Total DLLs                    ; N/A until Partition Merge                      ;
-+-------------------------------+------------------------------------------------+
-
-
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 12          ;
-; Maximum allowed            ; 6           ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-+----------------------------+-------------+
-
-
-+---------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |ALU ;
-+----------------+-------+--------------------------------------------+
-; Parameter Name ; Value ; Type                                       ;
-+----------------+-------+--------------------------------------------+
-; N              ; 4     ; Signed Integer                             ;
-+----------------+-------+--------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: sumador:operacion_suma ;
-+----------------+-------+--------------------------------------------+
-; Parameter Name ; Value ; Type                                       ;
-+----------------+-------+--------------------------------------------+
-; n              ; 4     ; Signed Integer                             ;
-+----------------+-------+--------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: restador:operacion_resta ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; n              ; 4     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: multiplicador:mult_logic ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; N              ; 4     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
++----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                     ;
++---------------------------------+------------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Tue Mar 25 22:08:00 2025          ;
+; Quartus Prime Version           ; 22.1std.0 Build 915 10/25/2022 SC Lite Edition ;
+; Revision Name                   ; ALU                                            ;
+; Top-level Entity Name           ; ALU                                            ;
+; Family                          ; Cyclone V                                      ;
+; Logic utilization (in ALMs)     ; N/A                                            ;
+; Total registers                 ; 0                                              ;
+; Total pins                      ; 39                                             ;
+; Total virtual pins              ; 0                                              ;
+; Total block memory bits         ; 0                                              ;
+; Total DSP Blocks                ; 0                                              ;
+; Total HSSI RX PCSs              ; 0                                              ;
+; Total HSSI PMA RX Deserializers ; 0                                              ;
+; Total HSSI TX PCSs              ; 0                                              ;
+; Total HSSI PMA TX Serializers   ; 0                                              ;
+; Total PLLs                      ; 0                                              ;
+; Total DLLs                      ; 0                                              ;
++---------------------------------+------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Elaboration Settings                                                                                           ;
+; Analysis & Synthesis Settings                                                                                             ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
@@ -200,6 +157,192 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 12          ;
+; Maximum allowed            ; 6           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                                             ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                                                                                         ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+; ALU.sv                           ; yes             ; User SystemVerilog HDL File  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv                 ;         ;
+; OpCodeEnum.sv                    ; yes             ; User SystemVerilog HDL File  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv          ;         ;
+; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/22.1std/quartus/libraries/megafunctions/lpm_divide.tdf                                                                             ;         ;
+; abs_divider.inc                  ; yes             ; Megafunction                 ; c:/intelfpga_lite/22.1std/quartus/libraries/megafunctions/abs_divider.inc                                                                            ;         ;
+; sign_div_unsign.inc              ; yes             ; Megafunction                 ; c:/intelfpga_lite/22.1std/quartus/libraries/megafunctions/sign_div_unsign.inc                                                                        ;         ;
+; aglobal221.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/22.1std/quartus/libraries/megafunctions/aglobal221.inc                                                                             ;         ;
+; db/lpm_divide_sfo.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_divide_sfo.tdf  ;         ;
+; db/abs_divider_2ag.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/abs_divider_2ag.tdf ;         ;
+; db/alt_u_div_kse.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/alt_u_div_kse.tdf   ;         ;
+; db/lpm_abs_jn9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_abs_jn9.tdf     ;         ;
+; db/lpm_divide_pno.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_divide_pno.tdf  ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+
+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimate of Logic utilization (ALMs needed) ; 84         ;
+;                                             ;            ;
+; Combinational ALUT usage for logic          ; 147        ;
+;     -- 7 input functions                    ; 0          ;
+;     -- 6 input functions                    ; 20         ;
+;     -- 5 input functions                    ; 33         ;
+;     -- 4 input functions                    ; 36         ;
+;     -- <=3 input functions                  ; 58         ;
+;                                             ;            ;
+; Dedicated logic registers                   ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 39         ;
+;                                             ;            ;
+; Total DSP Blocks                            ; 0          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; B[0]~input ;
+; Maximum fan-out                             ; 35         ;
+; Total fan-out                               ; 643        ;
+; Average fan-out                             ; 2.86       ;
++---------------------------------------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                 ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node            ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                               ; Entity Name     ; Library Name ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
+; |ALU                                  ; 147 (48)            ; 0 (0)                     ; 0                 ; 0          ; 39   ; 0            ; |ALU                                                                                              ; ALU             ; work         ;
+;    |lpm_divide:Div0|                  ; 31 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0                                                                              ; lpm_divide      ; work         ;
+;       |lpm_divide_pno:auto_generated| ; 31 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_pno:auto_generated                                                ; lpm_divide_pno  ; work         ;
+;          |abs_divider_2ag:divider|    ; 31 (5)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_pno:auto_generated|abs_divider_2ag:divider                        ; abs_divider_2ag ; work         ;
+;             |alt_u_div_kse:divider|   ; 26 (26)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Div0|lpm_divide_pno:auto_generated|abs_divider_2ag:divider|alt_u_div_kse:divider  ; alt_u_div_kse   ; work         ;
+;    |lpm_divide:Mod0|                  ; 40 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0                                                                              ; lpm_divide      ; work         ;
+;       |lpm_divide_sfo:auto_generated| ; 40 (0)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0|lpm_divide_sfo:auto_generated                                                ; lpm_divide_sfo  ; work         ;
+;          |abs_divider_2ag:divider|    ; 40 (4)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0|lpm_divide_sfo:auto_generated|abs_divider_2ag:divider                        ; abs_divider_2ag ; work         ;
+;             |alt_u_div_kse:divider|   ; 30 (30)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0|lpm_divide_sfo:auto_generated|abs_divider_2ag:divider|alt_u_div_kse:divider  ; alt_u_div_kse   ; work         ;
+;             |lpm_abs_jn9:my_abs_den|  ; 4 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0|lpm_divide_sfo:auto_generated|abs_divider_2ag:divider|lpm_abs_jn9:my_abs_den ; lpm_abs_jn9     ; work         ;
+;             |lpm_abs_jn9:my_abs_num|  ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|lpm_divide:Mod0|lpm_divide_sfo:auto_generated|abs_divider_2ag:divider|lpm_abs_jn9:my_abs_num ; lpm_abs_jn9     ; work         ;
+;    |multiplicador:mult_logic|         ; 17 (17)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|multiplicador:mult_logic                                                                     ; multiplicador   ; work         ;
+;    |restador:operacion_resta|         ; 6 (6)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|restador:operacion_resta                                                                     ; restador        ; work         ;
+;    |sumador:operacion_suma|           ; 5 (5)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |ALU|sumador:operacion_suma                                                                       ; sumador         ; work         ;
++---------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 0     ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |ALU ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; N              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: sumador:operacion_suma ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; n              ; 4     ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: restador:operacion_resta ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; n              ; 4     ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: multiplicador:mult_logic ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; N              ; 4     ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 4              ; Untyped                ;
+; LPM_WIDTHD             ; 4              ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_sfo ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Div0 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 4              ; Untyped                ;
+; LPM_WIDTHD             ; 4              ; Untyped                ;
+; LPM_NREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_DREPRESENTATION    ; SIGNED         ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; FALSE          ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_pno ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +----------------------------------------------------+
 ; Port Connectivity Checks: "sumador:operacion_suma" ;
 +------+-------+----------+--------------------------+
@@ -209,33 +352,110 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+-------+----------+--------------------------+
 
 
-+---------------------------------+
-; Analysis & Elaboration Messages ;
-+---------------------------------+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_lcell_comb     ; 148                         ;
+;     arith             ; 47                          ;
+;         0 data inputs ; 10                          ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 10                          ;
+;         3 data inputs ; 5                           ;
+;         4 data inputs ; 10                          ;
+;         5 data inputs ; 10                          ;
+;     normal            ; 91                          ;
+;         0 data inputs ; 1                           ;
+;         2 data inputs ; 11                          ;
+;         3 data inputs ; 14                          ;
+;         4 data inputs ; 22                          ;
+;         5 data inputs ; 23                          ;
+;         6 data inputs ; 20                          ;
+;     shared            ; 10                          ;
+;         0 data inputs ; 4                           ;
+;         2 data inputs ; 2                           ;
+;         4 data inputs ; 4                           ;
+; boundary_port         ; 39                          ;
+;                       ;                             ;
+; Max LUT depth         ; 12.00                       ;
+; Average LUT depth     ; 8.54                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:00     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Elaboration
+Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
-    Info: Processing started: Mon Mar 24 19:26:11 2025
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU -c ALU --analysis_and_elaboration
+    Info: Processing started: Tue Mar 25 22:07:52 2025
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU -c ALU
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file alu_testbench.sv
     Info (12023): Found entity 1: ALU_testbench File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU_testbench.sv Line: 4
-Info (12021): Found 4 design units, including 4 entities, in source file alu.sv
-    Info (12023): Found entity 1: ALU File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 4
-    Info (12023): Found entity 2: sumador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 60
-    Info (12023): Found entity 3: restador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 84
-    Info (12023): Found entity 4: multiplicador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 107
+Info (12021): Found 5 design units, including 5 entities, in source file alu.sv
+    Info (12023): Found entity 1: sumador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 4
+    Info (12023): Found entity 2: restador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 29
+    Info (12023): Found entity 3: multiplicador File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 54
+    Info (12023): Found entity 4: ALU File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 77
+    Info (12023): Found entity 5: top File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 147
 Info (12021): Found 1 design units, including 0 entities, in source file opcodeenum.sv
     Info (12022): Found design unit 1: OpCodeEnum (SystemVerilog) File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/OpCodeEnum.sv Line: 1
 Info (12127): Elaborating entity "ALU" for the top level hierarchy
-Info (12128): Elaborating entity "sumador" for hierarchy "sumador:operacion_suma" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 23
-Info (12128): Elaborating entity "restador" for hierarchy "restador:operacion_resta" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 25
-Info (12128): Elaborating entity "multiplicador" for hierarchy "multiplicador:mult_logic" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 28
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4778 megabytes
-    Info: Processing ended: Mon Mar 24 19:26:17 2025
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:16
+Info (12128): Elaborating entity "sumador" for hierarchy "sumador:operacion_suma" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 96
+Info (12128): Elaborating entity "restador" for hierarchy "restador:operacion_resta" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 97
+Info (12128): Elaborating entity "multiplicador" for hierarchy "multiplicador:mult_logic" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 98
+Info (278001): Inferred 2 megafunctions from design logic
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 129
+    Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 128
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Mod0" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 129
+Info (12133): Instantiated megafunction "lpm_divide:Mod0" with the following parameter: File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 129
+    Info (12134): Parameter "LPM_WIDTHN" = "4"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_sfo.tdf
+    Info (12023): Found entity 1: lpm_divide_sfo File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_divide_sfo.tdf Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file db/abs_divider_2ag.tdf
+    Info (12023): Found entity 1: abs_divider_2ag File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/abs_divider_2ag.tdf Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_u_div_kse.tdf
+    Info (12023): Found entity 1: alt_u_div_kse File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/alt_u_div_kse.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_abs_jn9.tdf
+    Info (12023): Found entity 1: lpm_abs_jn9 File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_abs_jn9.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "lpm_divide:Div0" File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 128
+Info (12133): Instantiated megafunction "lpm_divide:Div0" with the following parameter: File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 128
+    Info (12134): Parameter "LPM_WIDTHN" = "4"
+    Info (12134): Parameter "LPM_WIDTHD" = "4"
+    Info (12134): Parameter "LPM_NREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_DREPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "LPM_HINT" = "LPM_REMAINDERPOSITIVE=FALSE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_divide_pno.tdf
+    Info (12023): Found entity 1: lpm_divide_pno File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/db/lpm_divide_pno.tdf Line: 25
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "Cin" is stuck at GND File: C:/Users/Meibel/Desktop/1Semestre2025/Taller_de_Diseno_Digital/Laboratorio2/mvillatoro_mmora_ybadilla_digital-design-lab-2025/ALU.sv Line: 93
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 186 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 12 input pins
+    Info (21059): Implemented 27 output pins
+    Info (21061): Implemented 147 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4838 megabytes
+    Info: Processing ended: Tue Mar 25 22:08:00 2025
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:17
 
 
