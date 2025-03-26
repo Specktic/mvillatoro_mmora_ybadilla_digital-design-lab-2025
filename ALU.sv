@@ -149,13 +149,13 @@ module top(
   input logic rst_n,
   input logic [3:0] SW_A,
   input logic [3:0] SW_B,
-  input logic [2:0] KEY,          // 3 botones: KEY[2]=Suma, KEY[1]=Resta, KEY[0]=Mult
-  output logic [6:0] HEX0         // Display de 7 segmentos
+  input logic [3:0] KEY,           // KEY[3]=Modo, KEY[2]=Suma, KEY[1]=Resta, KEY[0]=Mult
+  output logic [6:0] HEX3, HEX2, HEX1, HEX0,
+  output logic LED_MODE             // 1 = binario, 0 = decimal
 );
 
   parameter N = 4;
 
-  // Internas
   logic signed [N-1:0] A = SW_A;
   logic signed [N-1:0] B = SW_B;
   logic signed [N-1:0] out;
@@ -164,19 +164,59 @@ module top(
   logic carry_out, borrow_out;
   logic Z, Nf, V, Cout, Cin;
 
-  OpCode op;
+  OpCode op_sel;
+  logic [23:0] letter_timer = 0;
+  logic show_letter = 0;
 
-  // Lógica para seleccionar la operación
-  always_comb begin
-    if (!KEY[2])      op = Add;
-    else if (!KEY[1]) op = Sub;
-    else if (!KEY[0]) op = Mult;
-    else              op = Add; // Default
+  // Estado anterior de teclas
+  logic [3:0] KEY_prev;
+
+  // Modo de visualización: binario o decimal
+  logic display_binary = 0;
+  logic prev_key3 = 1;
+  assign LED_MODE = display_binary;
+
+  always_ff @(posedge clk or negedge rst_n) begin
+    if (!rst_n) begin
+      op_sel <= Add;
+      KEY_prev <= 4'b1111;
+      letter_timer <= 0;
+      show_letter <= 0;
+      display_binary <= 0;
+      prev_key3 <= 1;
+    end else begin
+      // Selección de operación por flanco de bajada
+      if (KEY_prev[2] && !KEY[2]) begin
+        op_sel <= Add;
+        letter_timer <= 24'd12_000_000; // ~1 seg
+        show_letter <= 1;
+      end else if (KEY_prev[1] && !KEY[1]) begin
+        op_sel <= Sub;
+        letter_timer <= 24'd12_000_000;
+        show_letter <= 1;
+      end else if (KEY_prev[0] && !KEY[0]) begin
+        op_sel <= Mult;
+        letter_timer <= 24'd12_000_000;
+        show_letter <= 1;
+      end
+
+      // Cambio de modo
+      if (prev_key3 && !KEY[3])
+        display_binary <= ~display_binary;
+
+      prev_key3 <= KEY[3];
+      KEY_prev <= KEY;
+
+      if (letter_timer > 0)
+        letter_timer <= letter_timer - 1;
+      else
+        show_letter <= 0;
+    end
   end
 
-  // Instancia de la ALU
+  // ALU
   ALU #(N) dut (
-    .A(A), .B(B), .op(op), .out(out),
+    .A(A), .B(B), .op(op_sel), .out(out),
     .suma_result(suma_result),
     .carry_out(carry_out),
     .resta_result(resta_result),
@@ -185,32 +225,79 @@ module top(
     .Z(Z), .Nf(Nf), .V(V), .Cout(Cout), .Cin(Cin)
   );
 
-  // Muestra resultado en HEX0 (solo valores de 0–9)
-  logic [3:0] result_to_display;
+  // Resultado
+  logic signed [7:0] result_display;
+  logic [3:0] dig0, dig1, dig2;
+  logic is_negative;
+  integer abs_val;
+
   always_comb begin
-    if (op == Mult)
-      result_to_display = mult_result[3:0]; // parte baja
-    else
-      result_to_display = out[3:0]; // suma/resta
+    result_display = (op_sel == Mult) ? mult_result[7:0] : out;
+    is_negative = (result_display < 0);
+    abs_val = is_negative ? -result_display : result_display;
+
+    dig0 = abs_val % 10;
+    dig1 = (abs_val / 10) % 10;
+    dig2 = (abs_val / 100) % 10;
   end
 
-  assign HEX0 = to_hex7seg(result_to_display);
+  // Mostrar en display
+  always_comb begin
+    logic [3:0] result_bin = result_display[3:0];
 
-  // Función para display de 7 segmentos
-  function automatic logic [6:0] to_hex7seg(input logic [3:0] num);
+    if (show_letter) begin
+      logic [6:0] letter_seg;
+      case (op_sel)
+        Add:  letter_seg = 7'b000_1000; // A
+        Sub:  letter_seg = 7'b001_0010; // S
+        Mult: letter_seg = 7'b101_0000; // M
+        default: letter_seg = 7'b111_1111;
+      endcase
+      HEX0 = letter_seg;
+      HEX1 = letter_seg;
+      HEX2 = letter_seg;
+      HEX3 = letter_seg;
+
+    end else if (display_binary) begin
+      HEX0 = to_hex7seg_bit(result_bin[0]);
+      HEX1 = to_hex7seg_bit(result_bin[1]);
+      HEX2 = to_hex7seg_bit(result_bin[2]);
+      HEX3 = to_hex7seg_bit(result_bin[3]);
+
+    end else begin
+      HEX0 = to_hex7seg_digit(dig0);
+      HEX1 = to_hex7seg_digit(dig1);
+      HEX2 = to_hex7seg_digit(dig2);
+      HEX3 = is_negative ? 7'b011_1111 : 7'b111_1111; // - o apagado
+    end
+  end
+
+  // Funciones de display
+  function automatic logic [6:0] to_hex7seg_digit(input logic [3:0] num);
     case (num)
-      4'd0: to_hex7seg = 7'b100_0000;
-      4'd1: to_hex7seg = 7'b111_1001;
-      4'd2: to_hex7seg = 7'b010_0100;
-      4'd3: to_hex7seg = 7'b011_0000;
-      4'd4: to_hex7seg = 7'b001_1001;
-      4'd5: to_hex7seg = 7'b001_0010;
-      4'd6: to_hex7seg = 7'b000_0010;
-      4'd7: to_hex7seg = 7'b111_1000;
-      4'd8: to_hex7seg = 7'b000_0000;
-      4'd9: to_hex7seg = 7'b001_0000;
-      default: to_hex7seg = 7'b111_1111; // apagado
+      4'd0: to_hex7seg_digit = 7'b100_0000;
+      4'd1: to_hex7seg_digit = 7'b111_1001;
+      4'd2: to_hex7seg_digit = 7'b010_0100;
+      4'd3: to_hex7seg_digit = 7'b011_0000;
+      4'd4: to_hex7seg_digit = 7'b001_1001;
+      4'd5: to_hex7seg_digit = 7'b001_0010;
+      4'd6: to_hex7seg_digit = 7'b000_0010;
+      4'd7: to_hex7seg_digit = 7'b111_1000;
+      4'd8: to_hex7seg_digit = 7'b000_0000;
+      4'd9: to_hex7seg_digit = 7'b001_0000;
+      default: to_hex7seg_digit = 7'b111_1111;
+    endcase
+  endfunction
+
+  function automatic logic [6:0] to_hex7seg_bit(input logic bit_val);
+    case (bit_val)
+      1'b0: to_hex7seg_bit = 7'b100_0000;
+      1'b1: to_hex7seg_bit = 7'b111_1001;
+      default: to_hex7seg_bit = 7'b111_1111;
     endcase
   endfunction
 
 endmodule
+
+
+
