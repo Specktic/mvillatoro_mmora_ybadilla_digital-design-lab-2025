@@ -4,11 +4,11 @@ module top(
   input logic SW_A, SW_B, SW_C, SW_D, SW_E, SW_F, SW_G, SW_H,
   input logic [2:0] KEY,           // KEY[3]=Reset, KEY[2]=Suma, KEY[1]=Resta, KEY[0]=Mult
   output logic [6:0] HEX5, HEX4, HEX3, HEX2, HEX1, HEX0
-
 );
 
-  parameter N = 4;
+  import OpCodeEnum::*;
 
+  parameter N = 4;
 
   // Combinar switches en dos números de 4 bits
   logic [3:0] sw_x, sw_y;
@@ -20,7 +20,7 @@ module top(
   assign B = $signed(sw_y);
 
   logic signed [N-1:0] out;
-  logic [N-1:0] suma_result, resta_result;
+  logic signed [N-1:0] suma_result, resta_result;
   logic [2*N-1:0] mult_result;
   logic carry_out, borrow_out;
   logic Z, Nf, V, Cout, Cin;
@@ -30,12 +30,12 @@ module top(
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
-      op_sel <= Add;
+      op_sel <= OpCode'(4'b1111); // Estado inválido al inicio
       KEY_prev <= 4'b1111;
     end else begin
-      if (KEY_prev[2] && !KEY[2]) op_sel <= Add;
-      else if (KEY_prev[1] && !KEY[1]) op_sel <= Sub;
-      else if (KEY_prev[0] && !KEY[0]) op_sel <= Mult;
+      if (KEY_prev[2] && !KEY[2]) op_sel <= Add; // Suma
+      else if (KEY_prev[1] && !KEY[1]) op_sel <= Sub; // Resta
+      else if (KEY_prev[0] && !KEY[0]) op_sel <= Mult; // Multiplicación
 
       KEY_prev <= KEY;
     end
@@ -63,7 +63,12 @@ module top(
   always_comb begin
     val_a = A;
     val_b = B;
-    val_res = (op_sel == Mult) ? mult_result[7:0] : out;
+    case (op_sel)
+      Add: val_res = suma_result;
+      Sub: val_res = resta_result;
+      Mult: val_res = mult_result[7:0];
+      default: val_res = 0;
+    endcase
 
     is_neg_a = (val_a < 0);
     abs_a = is_neg_a ? -val_a : val_a;
@@ -112,4 +117,8 @@ module top(
   endfunction
 
 endmodule
+
+
+
+
 

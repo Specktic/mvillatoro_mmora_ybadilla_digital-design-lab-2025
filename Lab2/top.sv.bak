@@ -1,14 +1,14 @@
-module top(
+module top( 
   input logic clk,
+  input logic rst_n,
   input logic SW_A, SW_B, SW_C, SW_D, SW_E, SW_F, SW_G, SW_H,
-  input logic [3:0] KEY,           // KEY[3]=Modo, KEY[2]=Suma, KEY[1]=Resta, KEY[0]=Mult
-  output logic [6:0] HEX5, HEX4, HEX3, HEX2, HEX1, HEX0,
-  output logic LED_MODE
+  input logic [2:0] KEY,           // KEY[3]=Reset, KEY[2]=Suma, KEY[1]=Resta, KEY[0]=Mult
+  output logic [6:0] HEX5, HEX4, HEX3, HEX2, HEX1, HEX0
+
 );
 
   parameter N = 4;
-  logic rst_n;
-  assign rst_n = KEY[3];  // activo bajo
+
 
   // Combinar switches en dos números de 4 bits
   logic [3:0] sw_x, sw_y;
@@ -26,47 +26,18 @@ module top(
   logic Z, Nf, V, Cout, Cin;
 
   OpCode op_sel;
-  logic [23:0] letter_timer = 0;
-  logic show_letter = 0;
-
   logic [3:0] KEY_prev;
-  logic display_binary = 0;
-  logic prev_key3 = 1;
-  assign LED_MODE = display_binary;
 
   always_ff @(posedge clk or negedge rst_n) begin
     if (!rst_n) begin
       op_sel <= Add;
       KEY_prev <= 4'b1111;
-      letter_timer <= 0;
-      show_letter <= 0;
-      display_binary <= 0;
-      prev_key3 <= 1;
     end else begin
-      if (KEY_prev[2] && !KEY[2]) begin
-        op_sel <= Add;
-        letter_timer <= 24'd12_000_000;
-        show_letter <= 1;
-      end else if (KEY_prev[1] && !KEY[1]) begin
-        op_sel <= Sub;
-        letter_timer <= 24'd12_000_000;
-        show_letter <= 1;
-      end else if (KEY_prev[0] && !KEY[0]) begin
-        op_sel <= Mult;
-        letter_timer <= 24'd12_000_000;
-        show_letter <= 1;
-      end
+      if (KEY_prev[2] && !KEY[2]) op_sel <= Add;
+      else if (KEY_prev[1] && !KEY[1]) op_sel <= Sub;
+      else if (KEY_prev[0] && !KEY[0]) op_sel <= Mult;
 
-      if (prev_key3 && !KEY[3])
-        display_binary <= ~display_binary;
-
-      prev_key3 <= KEY[3];
       KEY_prev <= KEY;
-
-      if (letter_timer > 0)
-        letter_timer <= letter_timer - 1;
-      else
-        show_letter <= 0;
     end
   end
 
@@ -81,7 +52,7 @@ module top(
     .Z(Z), .Nf(Nf), .V(V), .Cout(Cout), .Cin(Cin)
   );
 
-  // Convertir números A, B y resultado a dígitos
+  // Convertir A, B y resultado a dígitos decimales
   logic signed [7:0] val_a, val_b, val_res;
   logic is_neg_a, is_neg_b, is_neg_res;
   integer abs_a, abs_b, abs_res;
@@ -110,36 +81,20 @@ module top(
     R_dig1 = (abs_res / 10) % 10;
   end
 
-  // Mostrar valores
+  // Mostrar en displays
   always_comb begin
-    if (show_letter) begin
-      logic [6:0] letter_seg;
-      case (op_sel)
-        Add:  letter_seg = 7'b000_1000; // A
-        Sub:  letter_seg = 7'b001_0010; // S
-        Mult: letter_seg = 7'b101_0000; // M
-        default: letter_seg = 7'b111_1111;
-      endcase
-      HEX0 = letter_seg;
-      HEX1 = letter_seg;
-      HEX2 = letter_seg;
-      HEX3 = letter_seg;
-      HEX4 = letter_seg;
-      HEX5 = letter_seg;
-    end else begin
-      // Resultado
-      HEX0 = to_hex7seg_digit(R_dig0);
-      HEX1 = is_neg_res ? 7'b011_1111 : to_hex7seg_digit(R_dig1);  // '-' o decena
-      // B
-      HEX2 = to_hex7seg_digit(B_dig0);
-      HEX3 = is_neg_b ? 7'b011_1111 : to_hex7seg_digit(B_dig1);
-      // A
-      HEX4 = to_hex7seg_digit(A_dig0);
-      HEX5 = is_neg_a ? 7'b011_1111 : to_hex7seg_digit(A_dig1);
-    end
+    // Resultado
+    HEX0 = to_hex7seg_digit(R_dig0);
+    HEX1 = is_neg_res ? 7'b011_1111 : to_hex7seg_digit(R_dig1);  // '-' o decena
+    // B
+    HEX2 = to_hex7seg_digit(B_dig0);
+    HEX3 = is_neg_b ? 7'b011_1111 : to_hex7seg_digit(B_dig1);
+    // A
+    HEX4 = to_hex7seg_digit(A_dig0);
+    HEX5 = is_neg_a ? 7'b011_1111 : to_hex7seg_digit(A_dig1);
   end
 
-  // Funciones
+  // Función para convertir dígito decimal a display
   function automatic logic [6:0] to_hex7seg_digit(input logic [3:0] num);
     case (num)
       4'd0: to_hex7seg_digit = 7'b100_0000;
@@ -157,3 +112,4 @@ module top(
   endfunction
 
 endmodule
+
