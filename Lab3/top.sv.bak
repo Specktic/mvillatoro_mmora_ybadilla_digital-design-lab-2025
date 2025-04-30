@@ -1,0 +1,34 @@
+// modulo principal que utiliza sync_vga y vga_grid 
+module vga_controller (
+    input  logic CLOCK_50,    // Clock de 25 MHz
+    input  logic reset,        // Reset activo en high
+
+    output logic h_sync,       // Salida sync horizontal
+    output logic v_sync,       // Salida sync vertical
+	 //Canales VGA
+    output logic [7:0] red,    // Canal rojo VGA
+    output logic [7:0] green,  // Canal verde VGA
+    output logic [7:0] blue    // Canal azul VGA
+);
+	 
+	 //clock de 50 a 25 (MHz)
+	 logic clk_25;
+	 
+	 pll_25mhz pll_inst(
+			.inclk0(CLOCK_50), // Entrada: clk 50
+			.c0(clk_25) // salida: clk 25
+	 )
+
+    // Se instancian los modulos
+	 
+    vga_controller (
+		  .clk_25mhz(clk_25),
+        .reset(reset),
+		  .h_sync(h_sync),
+		  .v_sync(v_sync),
+        .red(red),
+        .green(green),
+        .blue(blue)
+    );
+
+endmodule

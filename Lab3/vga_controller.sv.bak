@@ -18,18 +18,18 @@ module vga_controller (
     // Se instancian los modulos
 	 
 	 //sync de señales
-    sync_vga sync_inst (
+    vga_sync sync_inst (
         .clk(clk_25mhz),
         .reset(reset),
-        .hsync(h_sync),
-        .vsync(v_sync),
+        .h_sync(h_sync),
+        .v_sync(v_sync),
         .video_on(video_on),
         .h_count(h_count),
         .v_count(v_count)
     );
 
     // grid connect4
-    vga_grid color_inst (
+    vga_color_grid color_inst (
         .h_count(h_count),
         .v_count(v_count),
         .video_on(video_on),
