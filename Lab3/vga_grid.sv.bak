@@ -15,7 +15,7 @@ module vga_grid (
     // Ancho de la línea de separación entre celdas
     localparam LINE_THICKNESS = 2;
 
-    // fila y columna actual
+    // Calculamos en qué fila y columna estamos
     logic [2:0] col;
     logic [2:0] row;
 
