@@ -8,6 +8,8 @@ module vga_controller_tb;
 
     logic [7:0] red, green, blue;
     logic h_sync, v_sync;
+	 
+	 logic video_on;
 
     // Simulador de reloj: 50 MHz (20 ns periodo)
     initial clk_50 = 0;
@@ -28,7 +30,8 @@ module vga_controller_tb;
         .green(green),
         .blue(blue),
         .h_sync(h_sync),
-        .v_sync(v_sync)
+        .v_sync(v_sync),
+		  .video_on(video_on)
     );
 
     // Tiempo total de simulación

@@ -1,50 +1,122 @@
-//Modulo para dibujar el grid del juego, los 640x480 se dividen en 6 filas y 7 columnas
+//Modulo para dibujar el grid del juego, los 640x480 se dividen en 6 filas y 7 columnas, logica para dibujar las fichas de cada jugador
 module vga_grid (
-    input  logic [9:0] h_count,
-    input  logic [9:0] v_count,
+	 input logic clk,
+	 input logic reset,
+	 input logic [9:0] pixel_x,  // Coordenada X del pixel actual
+    input logic [9:0] pixel_y,  // Coordenada Y del pixel actual
+    input logic [5:0] red_player,  // ficha roja
+    input logic [5:0] blue_player,  // ficha azul
+	 input logic check,
     input  logic video_on,
-    output logic [7:0] red,
-    output logic [7:0] green,
-    output logic [7:0] blue
+	 output logic [7:0] red, green, blue
+	 
 );
 
     // Tamaño de las celdas
-    localparam CELL_WIDTH  = 91;
-    localparam CELL_HEIGHT = 80;
-
+    localparam CELL_WIDTH  = 91; //7 -> 640
+    localparam CELL_HEIGHT = 80; //6 -> 480
+	 localparam int BLOCK_SIZE = 40;
+    localparam int RADIUS = 20; // radio de los circulos para las fichas
+	 
+	 // registros para guardar los circulos de las fichas agregadas
+	 logic [41:0] red_reg;
+    logic [41:0] blue_reg;
+	
     // Ancho de la línea de separación entre celdas
     localparam LINE_THICKNESS = 2;
 
-    // fila y columna actual
-    logic [2:0] col;
-    logic [2:0] row;
-
-    assign col = h_count / CELL_WIDTH;
-    assign row = v_count / CELL_HEIGHT;
-
-    logic is_line;
-
-    always_comb begin
-        if (!video_on) begin
-            // background pantalla negra
-            red   = 8'd0;
-            green = 8'd0;
-            blue  = 8'd0;
+	 //Actualizar los registros para los circulos de cada jugador
+	 
+	 //Jugador1 -> rojo
+	 
+	 always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            red_reg <= 42'b0;
         end else begin
-            // borde de una celda (para dibujar las lineas del grid)
-            if ((h_count % CELL_WIDTH < LINE_THICKNESS) || 
-                (v_count % CELL_HEIGHT < LINE_THICKNESS)) begin
-                // Dibujar linea de celda black
-                red   = 8'd0;
-                green = 8'd0;
-                blue  = 8'd0;
-            end else begin
-                // Fondo del tablero blue
-                red   = 8'd50;
-                green = 8'd80;
-                blue  = 8'd200;
-            end
+            red_reg[red_player] <= 1'b1;
         end
     end
+
+	 
+	 //Jugador2 -> azul
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            blue_reg <= 42'b0;
+        end else if (!check) begin
+            blue_reg[blue_player] <= 1'b1;
+        end
+    end
+	 
+	 // verifica si un punto esta dentro del círculo
+    function logic is_inside_circle(
+        input int center_x, center_y, radius,
+        input int pixel_x, pixel_y
+    );
+        int dx, dy;
+        begin
+            dx = pixel_x - center_x;
+            dy = pixel_y - center_y;
+            is_inside_circle = (dx*dx + dy*dy <= radius*radius);
+        end
+    endfunction
+	 
+	 
+	 always_comb begin
+        // Fondo blanco para el color del tablero
+        red = 8'hFF;
+        green = 8'hFF;
+        blue = 8'hFF;
+
+        if (video_on) begin
+            // Dibujar las lineas del tablero en negro
+            if ((pixel_x % CELL_WIDTH < 5) || (pixel_y % CELL_HEIGHT < 5)) begin
+                red = 8'h00;
+                green = 8'h00;
+                blue = 8'h00; // Negro -> lineas
+            end
+
+            // Dibujar fichas del jugador 1 rojas
+            for (int row = 0; row < 6; row++) begin
+                for (int col = 0; col < 7; col++) begin
+                    if (red_reg[row * 7 + col]) begin
+                        if (is_inside_circle(
+                            col * CELL_WIDTH + CELL_WIDTH / 2,
+                            row * CELL_HEIGHT + CELL_HEIGHT / 2,
+                            RADIUS,
+                            pixel_x, pixel_y
+                        )) begin
+                            red = 8'hFF; // Rojo
+                            green = 8'h00;
+                            blue = 8'h00; 
+                        end
+                    end
+                end
+            end
+
+            // Dibujar fichas del jugador 2 azules
+            for (int row = 0; row < 6; row++) begin
+                for (int col = 0; col < 7; col++) begin
+                    if (blue_reg[row * 7 + col]) begin
+                        if (is_inside_circle(
+                            col * CELL_WIDTH + CELL_WIDTH / 2,
+                            row * CELL_HEIGHT + CELL_HEIGHT / 2,
+                            RADIUS,
+                            pixel_x, pixel_y
+                        )) begin
+                            red = 8'h00; 
+                            green = 8'h00; 
+                            blue = 8'hFF; // Azul
+                        end
+                    end
+                end
+            end
+        end else begin
+            // Fuera del area visible -> pantalla negra
+            red = 8'h00;
+            green = 8'h00;
+            blue = 8'h00;
+        end
+    end
+	 
 
 endmodule
