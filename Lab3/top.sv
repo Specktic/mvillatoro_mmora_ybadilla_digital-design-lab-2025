@@ -11,15 +11,13 @@ module top (
     input logic ARDUINO_VALIDA_JUGADA, // señal de validación de jugada Arduino Jugador 2 
 
     output logic [6:0] HEX0,
-    output logic [1:0] jugador_actual,
     output logic hay_ganador,
     output logic hsync,
     output logic vsync,
     output logic [7:0] red,
     output logic [7:0] green,
     output logic [7:0] blue
-	 
-	 
+
 );
 
     // Reset activo bajo
@@ -39,51 +37,79 @@ module top (
     logic revisar_ganador;
     logic [1:0] jugador_ganador;
     logic [2:0] columna_actual;
-	 
-    logic jugada_valida;
 
+	 logic listo_inicializador;
+	 logic jugador_inicial;
+    logic [2:0] columna_aleatoria;
+    logic jugada_valida;
+	 logic jugador_actual; // 1 bit
 
     // FSM Instancia
     logic enable_timer;
     logic reset_timer;
 
-		fsm_connect4 fsm (
-			 .clk(clk),
-			 .reset(reset),
-			 .jugada_fpga_valida(confirmar_jugada),         // Jugador 1 (FPGA)
-			 .jugada_arduino_valida(ARDUINO_VALIDA_JUGADA), // Jugador 2 (Arduino)
-			 .tiempo_agotado(tiempo_agotado),
-			 .juego_terminado(hay_ganador),
-			 .estado_actual(),
-			 .enable_timer(enable_timer),
-			 .reset_timer(reset_timer),
-			 .escribir_tablero(escribir_tablero),
-			 .revisar_ganador(revisar_ganador),
-			 .mostrar_ganador(), 
-			 .cambiar_turno(cambiar_turno)
-		);
+			fsm_connect4 fsm (
+				 .clk(clk),
+				 .reset(reset),
+				 .jugada_fpga_valida(jugador_actual == 0 ? jugada_valida : 0),
+				 .jugada_arduino_valida(jugador_actual == 1 ? jugada_valida : 0),
+				 .tiempo_agotado(tiempo_agotado),
+				 .juego_terminado(juego_terminado),
+
+				 .listo(listo_inicializador),          
+				 .jugador_inicial(jugador_inicial),     
+
+				 .estado_actual(estado_actual),
+				 .enable_timer(enable_timer),
+				 .reset_timer(reset_timer),
+				 .escribir_tablero(escribir_tablero),
+				 .revisar_ganador(revisar_ganador),
+				 .mostrar_ganador(mostrar_ganador),
+				 .cambiar_turno(cambiar_turno)
+			);
 	 
 	 
 		 
 	  // Selección de jugada según jugador
 		always_comb begin
-			 if (jugador_actual == 2'b01) begin
-				  columna_actual = SW;
-				  jugada_valida  = ~KEY1;
+			 jugada_valida = 1'b0;
+			 columna_actual = 3'b000;
+
+			 if (jugador_actual == 1'b0) begin
+				  // Turno de la FPGA
+				  if (tiempo_agotado) begin
+						columna_actual = columna_aleatoria;
+						jugada_valida = 1'b1;  // jugada automática
+				  end else begin
+						columna_actual = SW;
+						jugada_valida = ~KEY1;
+				  end
 			 end else begin
-				  columna_actual = COL_ARDUINO;
-				  jugada_valida  = ARDUINO_VALIDA_JUGADA;
+				  // Turno del Arduino
+				  if (tiempo_agotado) begin
+						columna_actual = columna_aleatoria;
+						jugada_valida = 1'b1;  // jugada automática
+				  end else begin
+						columna_actual = COL_ARDUINO;
+						jugada_valida = ARDUINO_VALIDA_JUGADA;
+				  end
 			 end
 		end
 
-    // Jugador actual
-    always_ff @(posedge clk or posedge reset) begin
-        if (reset)
-            jugador_actual <= 2'b01;
-        else if (cambiar_turno)
-            jugador_actual <= (jugador_actual == 2'b01) ? 2'b10 : 2'b01;
-    end
 
+
+	 
+	 // Generador aleatorio 
+		generador_aleatorio generador (
+			 .clk(clk),
+			 .reset(reset),
+			 .enable(tiempo_agotado),             
+			 .columna_aleatoria(columna_aleatoria)
+		);
+		 
+	 
+	 
+	 
     // Temporizador
     temporizador_10s timer (
         .clk(clk),
@@ -129,8 +155,30 @@ module top (
         .green(green),
         .blue(blue)
     );
+	 
+	// Instancia Controlar Jugador 
+	 control_jugador jugador_ctrl (
+		 .clk(clk),
+		 .reset(reset),
+		 .cambiar_turno(cambiar_turno),
+		 .jugador_inicial(jugador_inicial),
+		 .listo(listo_inicializador),
+		 .jugador_actual(jugador_actual)
+	);
+	
+	
+	
+		// Inicializador de juego 
+	// -----------------
+	inicializador_juego init (
+		 .clk(clk),
+		 .reset(reset),
+		 .start_inicial(1'b1),  // siempre activo tras reset
+		 .valor_aleatorio(valor_aleatorio),
+		 .jugador_inicial(jugador_inicial),
+		 .listo(listo_inicializador)
+	);
+	
 
-endmodule
 
-module two ();
 endmodule
