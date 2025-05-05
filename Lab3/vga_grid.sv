@@ -5,7 +5,7 @@ module vga_grid (
 	 input logic [9:0] pixel_x,  // Coordenada X del pixel actual
     input logic [9:0] pixel_y,  // Coordenada Y del pixel actual
     input logic [5:0] red_player,  // ficha roja
-    input logic [5:0] blue_player,  // ficha azul
+    input logic [5:0] yellow_player,  // ficha azul
 	 input logic check,
     input  logic video_on,
 	 output logic [7:0] red, green, blue
@@ -20,7 +20,7 @@ module vga_grid (
 	 
 	 // registros para guardar los circulos de las fichas agregadas
 	 logic [41:0] red_reg;
-    logic [41:0] blue_reg;
+    logic [41:0] yellow_reg;
 	
     // Ancho de la línea de separación entre celdas
     localparam LINE_THICKNESS = 2;
@@ -41,9 +41,9 @@ module vga_grid (
 	 //Jugador2 -> azul
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
-            blue_reg <= 42'b0;
+            yellow_reg <= 42'b0;
         end else if (!check) begin
-            blue_reg[blue_player] <= 1'b1;
+            yellow_reg[yellow_player] <= 1'b1;
         end
     end
 	 
@@ -62,9 +62,9 @@ module vga_grid (
 	 
 	 
 	 always_comb begin
-        // Fondo blanco para el color del tablero
-        red = 8'hFF;
-        green = 8'hFF;
+        // Fondo azul para el color del tablero
+        red = 8'h00;
+        green = 8'h00;
         blue = 8'hFF;
 
         if (video_on) begin
@@ -96,16 +96,17 @@ module vga_grid (
             // Dibujar fichas del jugador 2 azules
             for (int row = 0; row < 6; row++) begin
                 for (int col = 0; col < 7; col++) begin
-                    if (blue_reg[row * 7 + col]) begin
+                    if (yellow_reg[row * 7 + col]) begin
                         if (is_inside_circle(
                             col * CELL_WIDTH + CELL_WIDTH / 2,
                             row * CELL_HEIGHT + CELL_HEIGHT / 2,
                             RADIUS,
                             pixel_x, pixel_y
                         )) begin
-                            red = 8'h00; 
-                            green = 8'h00; 
-                            blue = 8'hFF; // Azul
+										//amarillo
+                            red = 8'hFF; 
+                            green = 8'hFF; 
+                            blue = 8'h00; 
                         end
                     end
                 end

@@ -11,7 +11,7 @@ module top (
 	 output logic vga_clk, // Señal del clock VGA (25.175 MHz),
 	 input logic check,
 	 input logic [5:0] red_player,  // jugador rojo
-    input logic [5:0] blue_player, // jugador azul
+    input logic [5:0] yellow_player, // jugador azul
 	 //pruebas con leds
     output logic [7:0] led,  // LEDs para mostrar el contador
     output logic test_led  // LED de prueba para clk_25
@@ -66,7 +66,7 @@ module top (
 		  .pixel_x(h_count),
 		  .pixel_y(v_count),
 		  .red_player(red_player),
-		  .blue_player(blue_player),
+		  .yellow_player(yellow_player),
 		  .check(check),
 		  .video_on(video_on),
 		  .red(red),
