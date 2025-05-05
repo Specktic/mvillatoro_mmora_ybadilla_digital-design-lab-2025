@@ -131,3 +131,6 @@ module top (
     );
 
 endmodule
+
+module two ();
+endmodule
