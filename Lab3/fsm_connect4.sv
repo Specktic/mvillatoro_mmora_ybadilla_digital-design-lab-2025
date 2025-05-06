@@ -1,12 +1,13 @@
 module fsm_connect4 (
     input logic clk,
     input logic reset,
-
+	 input logic listo,              // Señal del inicializador_juego
+	 input logic jugador_inicial,     // 0 = FPGA (J1), 1 = Arduino (J2)
     input logic jugada_fpga_valida,        // Señal: Jugador 1 hizo jugada
     input logic jugada_arduino_valida,     // Señal: Jugador 2 hizo jugada
     input logic tiempo_agotado,            // Señal: se acabaron los 10 segundos
     input logic juego_terminado,           // Señal: hay ganador o empate
-
+    input logic jugador_actual, // 0 = FPGA, 1 = Arduino
     output logic [2:0] estado_actual,
     output logic enable_timer,             // Habilita temporizador
     output logic reset_timer,              // Reinicia temporizador
@@ -50,18 +51,26 @@ module fsm_connect4 (
 
         case (estado)
 
-            INICIO: begin
-                reset_timer = 1;
-                siguiente = ESPERA_JUGADA;
-            end
+				INICIO: begin
+					 reset_timer = 1;
+					 if (listo) begin
+						  if (jugador_inicial == 0)
+								siguiente = ESPERA_JUGADA; // Jugador FPGA inicia
+						  else
+								siguiente = ESPERA_JUGADA; // Arduino inicia (pero debes usar cambiar_turno también)
+					 end
+				end
 
-            ESPERA_JUGADA: begin
-                enable_timer = 1;
-                if (jugada_fpga_valida || jugada_arduino_valida)
-                    siguiente = ACTUALIZA_TABLERO;
-                else if (tiempo_agotado)
-                    siguiente = TIEMPO_AGOTADO_ESTADO;
-            end
+				ESPERA_JUGADA: begin
+					 enable_timer = 1;
+
+					 if ((jugador_actual == 0 && jugada_fpga_valida) ||
+						  (jugador_actual == 1 && jugada_arduino_valida))
+						  siguiente = ACTUALIZA_TABLERO;
+					 else if (tiempo_agotado)
+						  siguiente = TIEMPO_AGOTADO_ESTADO;
+				end
+
 
             TIEMPO_AGOTADO_ESTADO: begin
                 escribir_tablero = 1;  // Jugada aleatoria
