@@ -119,6 +119,17 @@ module top (
         .hay_ganador(hay_ganador),
         .jugador_ganador(jugador_ganador)
     );
+	 
+	 // Arduino
+	 spi_slave_arduino spi_slave_inst (
+    .clk(clk),
+    .reset(reset),
+    .sck(SCK_ARDUINO),
+    .ss(SS_ARDUINO),
+    .mosi(MOSI_ARDUINO),
+    .col_arduino(COL_ARDUINO),
+    .arduino_valida_jugada(ARDUINO_VALIDA_JUGADA)
+)
 
     // VGA
     vga_controller vga (
@@ -151,5 +162,6 @@ module top (
         .jugador_inicial(jugador_inicial),
         .listo(listo_inicializador)
     );
+
 
 endmodule
