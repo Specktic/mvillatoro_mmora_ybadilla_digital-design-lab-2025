@@ -5,34 +5,22 @@ module tb_detector_victoria;
     logic [1:0] tablero [0:5][0:6];
     logic hay_ganador;
     logic [1:0] jugador_ganador;
+    logic [2:0] fila_ganadora [0:3];
+    logic [2:0] col_ganadora [0:3];
 
-    // Instancia del módulo
+    // Instancia del detector
     detector_victoria dut (
         .tablero(tablero),
         .hay_ganador(hay_ganador),
-        .jugador_ganador(jugador_ganador)
+        .jugador_ganador(jugador_ganador),
+        .fila_ganadora(fila_ganadora),
+        .col_ganadora(col_ganadora)
     );
 
     initial begin
-        $display("\n== Prueba aislada del detector de victoria ==\n");
+        $display("\n== Prueba del detector de victoria ==\n");
 
-        // CASO 1: Empate - sin ganador
-        tablero = '{
-            '{1,2,1,2,1,2,1},
-            '{2,1,2,1,2,1,2},
-            '{1,2,1,2,1,2,1},
-            '{1,2,1,2,1,2,1},
-            '{2,1,2,1,2,1,2},
-            '{2,1,2,1,2,1,2}
-        };
-
-        #10;
-        if (!hay_ganador)
-            $display("✔ Empate correctamente detectado (sin ganador)");
-        else
-            $display("✘ ERROR: Ganador detectado cuando no debería (jugador %0d)", jugador_ganador);
-
-        // CASO 2: Victoria horizontal por jugador 1
+        // CASO: Victoria horizontal jugador 1
         tablero = '{
             '{1,1,1,1,0,0,0},
             '{0,0,0,0,0,0,0},
@@ -41,14 +29,12 @@ module tb_detector_victoria;
             '{0,0,0,0,0,0,0},
             '{0,0,0,0,0,0,0}
         };
-
         #10;
-        if (hay_ganador && jugador_ganador == 1)
-            $display("✔ Victoria horizontal detectada correctamente para jugador 1");
-        else
-            $display("✘ ERROR: No se detectó victoria horizontal como se esperaba");
+        assert(hay_ganador && jugador_ganador == 1) else $fatal("ERROR: No se detectó victoria horizontal J1");
+        assert(fila_ganadora[0] == 0 && col_ganadora[0] == 0) else $fatal("ERROR coord 0");
+        assert(fila_ganadora[3] == 0 && col_ganadora[3] == 3) else $fatal("ERROR coord 3");
 
-        // CASO 3: Victoria vertical por jugador 2
+        // CASO: Victoria vertical jugador 2
         tablero = '{
             '{0,0,0,0,2,0,0},
             '{0,0,0,0,2,0,0},
@@ -57,14 +43,12 @@ module tb_detector_victoria;
             '{0,0,0,0,0,0,0},
             '{0,0,0,0,0,0,0}
         };
-
         #10;
-        if (hay_ganador && jugador_ganador == 2)
-            $display("✔ Victoria vertical detectada correctamente para jugador 2");
-        else
-            $display("✘ ERROR: No se detectó victoria vertical como se esperaba");
+        assert(hay_ganador && jugador_ganador == 2) else $fatal("ERROR: No se detectó victoria vertical J2");
+        assert(fila_ganadora[0] == 0 && col_ganadora[0] == 4) else $fatal("ERROR coord vertical 0");
+        assert(fila_ganadora[3] == 3 && col_ganadora[3] == 4) else $fatal("ERROR coord vertical 3");
 
-        // CASO 4: Victoria diagonal ↘ por jugador 1
+        // CASO: Diagonal ↘ jugador 1
         tablero = '{
             '{1,0,0,0,0,0,0},
             '{0,1,0,0,0,0,0},
@@ -73,14 +57,12 @@ module tb_detector_victoria;
             '{0,0,0,0,0,0,0},
             '{0,0,0,0,0,0,0}
         };
-
         #10;
-        if (hay_ganador && jugador_ganador == 1)
-            $display("✔ Victoria diagonal ↘ detectada correctamente para jugador 1");
-        else
-            $display("✘ ERROR: No se detectó victoria diagonal ↘ como se esperaba");
+        assert(hay_ganador && jugador_ganador == 1) else $fatal("ERROR: No se detectó diagonal ↘");
+        assert(fila_ganadora[0] == 0 && col_ganadora[0] == 0);
+        assert(fila_ganadora[3] == 3 && col_ganadora[3] == 3);
 
-        // CASO 5: Victoria diagonal ↙ por jugador 2
+        // CASO: Diagonal ↙ jugador 2
         tablero = '{
             '{0,0,0,2,0,0,0},
             '{0,0,2,0,0,0,0},
@@ -89,13 +71,26 @@ module tb_detector_victoria;
             '{0,0,0,0,0,0,0},
             '{0,0,0,0,0,0,0}
         };
-
         #10;
-        if (hay_ganador && jugador_ganador == 2)
-            $display("✔ Victoria diagonal ↙ detectada correctamente para jugador 2");
-        else
-            $display("✘ ERROR: No se detectó victoria diagonal ↙ como se esperaba");
+        assert(hay_ganador && jugador_ganador == 2) else $fatal("ERROR: No se detectó diagonal ↙");
+        assert(fila_ganadora[0] == 0 && col_ganadora[0] == 3);
+        assert(fila_ganadora[3] == 3 && col_ganadora[3] == 0);
 
-        $stop;
+        // CASO: Empate
+        tablero = '{
+            '{1,2,1,2,1,2,1},
+            '{2,1,2,1,2,1,2},
+            '{1,2,1,2,1,2,1},
+            '{2,1,2,1,2,1,2},
+            '{1,2,1,2,1,2,1},
+            '{2,1,2,1,2,1,2}
+        };
+        #10;
+        assert(hay_ganador && jugador_ganador == 2'b11) else $fatal("ERROR: No se detectó empate");
+
+        $display("\n✅ Todas las pruebas pasaron correctamente\n");
+        $finish;
     end
+
 endmodule
+
