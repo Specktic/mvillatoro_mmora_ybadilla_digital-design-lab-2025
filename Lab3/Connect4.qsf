@@ -57,11 +57,7 @@ set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH vga_controller_tb -section_id eda_simulation
-set_global_assignment -name EDA_TEST_BENCH_NAME vga_controller_tb -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id vga_controller_tb
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME vga_controller_tb -section_id vga_controller_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE vga_controller_tb.sv -section_id vga_controller_tb
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH tb_turno_inicial -section_id eda_simulation
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -111,6 +107,15 @@ set_location_assignment PIN_W25 -to SW[4]
 set_location_assignment PIN_V25 -to SW[5]
 set_location_assignment PIN_AC28 -to SW[6]
 set_location_assignment PIN_AJ4 -to KEY[0]
+set_location_assignment PIN_AK21 -to vga_clk
+set_global_assignment -name EDA_TEST_BENCH_NAME tb_turno_inicial -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id tb_turno_inicial
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME tb_turno_inicial -section_id tb_turno_inicial
+set_global_assignment -name EDA_TEST_BENCH_FILE tb_turno_inicial.sv -section_id tb_turno_inicial
+set_location_assignment PIN_AK4 -to boton_elegir
+set_location_assignment PIN_AA14 -to iniciar_juego
+set_global_assignment -name SIP_FILE clk_1Hz.sip
+set_global_assignment -name QIP_FILE clk_1Hz.qip
 set_global_assignment -name SOURCE_FILE clock_pll.cmp
 set_global_assignment -name SYSTEMVERILOG_FILE place_piece.sv
 set_global_assignment -name VERILOG_FILE clock_pll_.v
@@ -120,5 +125,27 @@ set_global_assignment -name SYSTEMVERILOG_FILE vga_controller.sv
 set_global_assignment -name QIP_FILE clock_pll.qip
 set_global_assignment -name SIP_FILE clock_pll.sip
 set_global_assignment -name SYSTEMVERILOG_FILE vga_controller_tb.sv
-set_location_assignment PIN_AK21 -to vga_clk
+set_global_assignment -name SYSTEMVERILOG_FILE seleccionar_jugador_inicial.sv
+set_global_assignment -name SYSTEMVERILOG_FILE turno_jugador.sv
+set_global_assignment -name SYSTEMVERILOG_FILE tb_turno_inicial.sv
+set_global_assignment -name SYSTEMVERILOG_FILE flanco_bajada.sv
+set_global_assignment -name SYSTEMVERILOG_FILE Temporizador_10s.sv
+set_global_assignment -name SYSTEMVERILOG_FILE contador_10s.sv
+set_global_assignment -name SYSTEMVERILOG_FILE decodificador_7seg.sv
+set_location_assignment PIN_W17 -to HEX0[0]
+set_location_assignment PIN_V18 -to HEX0[1]
+set_location_assignment PIN_AG17 -to HEX0[2]
+set_location_assignment PIN_AG16 -to HEX0[3]
+set_location_assignment PIN_AH17 -to HEX0[4]
+set_location_assignment PIN_AG18 -to HEX0[5]
+set_location_assignment PIN_AH18 -to HEX0[6]
+set_location_assignment PIN_AF16 -to HEX1[0]
+set_location_assignment PIN_V16 -to HEX1[1]
+set_location_assignment PIN_AE16 -to HEX1[2]
+set_location_assignment PIN_AD17 -to HEX1[3]
+set_location_assignment PIN_AE18 -to HEX1[4]
+set_location_assignment PIN_AE17 -to HEX1[5]
+set_location_assignment PIN_V17 -to HEX1[6]
+set_global_assignment -name SYSTEMVERILOG_FILE flanco_subida.sv
+set_global_assignment -name SYSTEMVERILOG_FILE fsm_control_juego.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
