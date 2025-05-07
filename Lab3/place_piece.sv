@@ -17,48 +17,62 @@ module place_piece (
     logic [41:0] red_reg;
     logic [41:0] yellow_reg;
 
-    // Índice calculado a partir de fila y columna
+    // Índices y señales internas
     logic [5:0] position;
     logic [2:0] selected_col;
     logic [2:0] available_row; // Fila más baja disponible en la columna seleccionada
-
-    // Señal para verificar si la columna es válida
     logic valid_col;
     logic cell_occupied;
 
     // Determinar la columna seleccionada a partir de los switches
-    always_comb begin
-        valid_col = 1'b0;
-        selected_col = 3'b111; // Valor inválido por defecto
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            valid_col <= 1'b0;
+            selected_col <= 3'b111;
+        end else begin
+            valid_col <= 1'b0;
+            selected_col <= 3'b111;
 
-        // Verificar cuál columna está seleccionada
-        for (int i = 0; i < COLS; i = i + 1) begin
-            if (col_switch[i]) begin
-                if (valid_col) begin
-                    // Más de un switch activo: movimiento inválido
-                    valid_col = 1'b0;
-                    selected_col = 3'b111;
-                end else begin
-                    valid_col = 1'b1;
-                    selected_col = i[2:0];
+            // Verificar cuál columna está seleccionada
+            for (int i = 0; i < COLS; i = i + 1) begin
+                if (col_switch[i]) begin
+                    if (valid_col) begin
+                        // Más de un switch activo: movimiento inválido
+                        valid_col <= 1'b0;
+                        selected_col <= 3'b111;
+                    end else begin
+                        valid_col <= 1'b1;
+                        selected_col <= i[2:0];
+                    end
                 end
             end
         end
     end
 
     // Buscar la fila más baja disponible en la columna seleccionada
-    always_comb begin
-        available_row = 3'b111; // Valor inválido por defecto (indica columna llena)
-        if (valid_col) begin
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            available_row <= 3'b111; // Indica columna llena
+            cell_occupied <= 1'b1;
+        end else if (valid_col) begin
+            available_row <= 3'b111; // Valor por defecto
+            cell_occupied <= 1'b1;
+
             for (int i = ROWS-1; i >= 0; i = i - 1) begin
                 position = i * COLS + selected_col; // Calcula la posición en el registro
                 if (!red_reg[position] && !yellow_reg[position]) begin
-                    available_row = i[2:0]; // Encuentra la fila disponible
-                    break; // Detiene la búsqueda
+                    // Verificar que las filas inferiores estén llenas
+                    if (i == ROWS-1 || (red_reg[position + COLS] || yellow_reg[position + COLS])) begin
+                        available_row <= i[2:0];
+                        cell_occupied <= 1'b0;
+                        break; // Detiene la búsqueda
+                    end
                 end
             end
+        end else begin
+            available_row <= 3'b111;
+            cell_occupied <= 1'b1;
         end
-        cell_occupied = (available_row == 3'b111); // Si no se encontró fila, la columna está llena
     end
 
     // Lógica para colocar la ficha

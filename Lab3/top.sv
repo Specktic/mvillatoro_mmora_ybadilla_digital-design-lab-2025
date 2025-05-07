@@ -8,22 +8,28 @@ module top (
     output logic vsync,        // Señal de sincronización vertical VGA
     output logic blank_b,      // Señal para forzar negro fuera del área visible
     output logic sync_b,       // Señal combinada de sincronización
+	 output logic vga_clk, // Señal del clock VGA (25.175 MHz),
     output logic [7:0] red, green, blue // Canales VGA
 );
 
     // Señales intermedias
-    logic clk_25, place_en, is_red;
+    logic clk_25;
+	 logic pll_locked;
+	 logic place_en, is_red;
     logic [41:0] red_player, yellow_player;
     logic valid_move;
-    logic [9:0] pixel_x, pixel_y;
+    logic [9:0] pixel_x, pixel_y; // Coordenadas de pixeles en la pantalla contadores
     logic video_on;
 
-    // Instancia del PLL para generar el reloj de 25 MHz
-    clock_pll pll_inst (
-        .refclk(clk_50),
-        .rst(reset),
-        .outclk_0(clk_25)
-    );
+    //instancia del pll
+	 clock_pll pll_inst(
+			.refclk   (clk_50), // Reloj 50 MHz
+			.rst      (reset),    
+			.outclk_0 (clk_25), // Salida reloj 25 MHz
+			.locked   (pll_locked)  // Señal PLL estable -> se puede usar 
+	 );
+	 
+	 assign vga_clk = clk_25;
 
     // Asignación de señales desde los interruptores
     assign place_en = ~KEY[0]; // El botón KEY[0] es activo en bajo
@@ -62,6 +68,7 @@ module top (
         .pixel_y(pixel_y),
         .red_player(red_player),
         .yellow_player(yellow_player),
+		  .check(check),
         .video_on(video_on),
         .red(red),
         .green(green),
