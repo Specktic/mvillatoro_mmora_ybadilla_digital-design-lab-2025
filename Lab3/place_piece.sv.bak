@@ -1,0 +1,55 @@
+module place_piece (
+    input logic clk,             // Reloj
+    input logic reset,           // Reset activo en alto
+    input logic [2:0] row,       // Fila de la ficha (0-5)
+    input logic [2:0] col,       // Columna de la ficha (0-6)
+    input logic is_red,          // 1 si es ficha roja, 0 si es amarilla
+    input logic place_en,        // Señal habilitadora para colocar una ficha
+    output logic [5:0] red_player,    // Salida para las posiciones de fichas rojas
+    output logic [5:0] yellow_player, // Salida para las posiciones de fichas amarillas
+    output logic valid_move       // Indica si la ficha fue colocada exitosamente
+);
+
+    // Parámetros del tablero
+    localparam ROWS = 6;
+    localparam COLS = 7;
+
+    // Registro interno para almacenar el estado del tablero
+    logic [41:0] red_reg;
+    logic [41:0] yellow_reg;
+
+    // Índice calculado a partir de fila y columna
+    logic [5:0] position;
+
+    // Señal para verificar si la celda está ocupada
+    logic cell_occupied;
+
+    // Conversión de fila y columna a una posición lineal (índice de 0 a 41)
+    always_comb begin
+        position = row * COLS + col; // Calcula el índice lineal
+        cell_occupied = red_reg[position] || yellow_reg[position]; // Verifica si está ocupada
+    end
+
+    // Lógica para colocar la ficha
+    always_ff @(posedge clk or posedge reset) begin
+        if (reset) begin
+            red_reg <= 42'b0;   // Reinicia el tablero para fichas rojas
+            yellow_reg <= 42'b0; // Reinicia el tablero para fichas amarillas
+            valid_move <= 1'b0; // Reinicia la señal de movimiento válido
+        end else if (place_en && !cell_occupied) begin
+            if (is_red) begin
+                red_reg[position] <= 1'b1;      // Coloca la ficha roja
+            end else begin
+                yellow_reg[position] <= 1'b1;   // Coloca la ficha amarilla
+            end
+            valid_move <= 1'b1;                 // Indica que el movimiento fue válido
+        end else begin
+            valid_move <= 1'b0; // Movimiento inválido (celda ocupada o señal inhabilitada)
+        end
+    end
+
+    // Conectar registros internos a las salidas
+    assign red_player = red_reg;
+    assign yellow_player = yellow_reg;
+
+endmodule
